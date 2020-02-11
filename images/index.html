@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body {
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  min-height:100vh;
+  overflow:hidden;
+  margin: 0;
+  padding: 0;
+
+}
+h3 {
+    font-size: 20px;
+    font-weight: normal ;
+}
+
+h3 .ser{
+    font-size: 30px;
+    font-weight: 800;
+    border-bottom: solid 2px black;
+}
+
+ul {
+  width:80vmin;
+  height:80vmin;
+  position:relative;
+}
+
+li { 
+    list-style: none;
+  /*
+    |a|d|a|
+    -------  -           
+    |/   \|  | 0.5h
+    |\   /|  ^          
+    ------- 
+    |  w  |
+  
+    a = 0.5h/tan60 = 0.28867513459h
+    d = 0.5h/sin60 = 0.57735026919h
+    w = a + d + a  = 1.15470053838h
+  
+    [zoom out]
+  
+        |a|_d_|         _____    _
+        /|     \       /     \   |
+  ang=60_|      \__d__/       \  | h     
+       \        /     \       /  |
+        \_____|/|      \_____/  _|
+              a     
+       |--------|
+           w
+  */
+  --h: calc(100% / 3);
+  --w: calc(1.15470053838 * var(--h));
+  --a: calc(0.28867513459 * var(--h));
+  --d: calc(0.57735026919 * var(--h));
+  height:var(--h);
+  width:var(--w);
+  position:absolute;
+}
+
+img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  /* 
+  
+   [clip-path coordinates]
+  
+    --A-F--
+   B|/   \|E    coord.
+    |\   /|       A(a/w, 0)
+    --C-D--       B(0, 50%)
+                  C(a/w, 100%)
+                  D(100% - a/w, 100%)
+                  E(100%, 50%)
+                  F(100% - a/w, 0)
+                where a/w = 0.24999999999
+  */
+  --aw:24.99999999999%;
+  clip-path:polygon(
+    var(--aw) 0,
+    0 50%,
+    var(--aw) 100%,
+    calc(100% - var(--aw)) 100%,
+    100% 50%,
+    calc(100% - var(--aw)) 0
+  );
+}
+
+li:nth-of-type(1) {
+  left:calc(50% - var(--a) - var(--d) * 0.5);
+  top:-10px;
+}
+li:nth-of-type(2) {
+  left:calc(50% - var(--a) * 2 - var(--d) * 1.8);
+  top:calc(var(--h) * 0.5);
+}
+li:nth-of-type(3) {
+  left:calc(50% - var(--a) * 2 - var(--d) * 1.8);
+  top:calc(var(--h) * 1.65);
+}
+li:nth-of-type(4) {
+  z-index: -4;
+  left:calc(50% - var(--a) - var(--d) * 0.53);
+  top:calc(var(--h) * 2.2);
+}
+li:nth-of-type(5) {
+  left:calc(50% + var(--d) * 0.74);
+  top:calc(var(--h) * 0.50);
+}
+li:nth-of-type(6) {
+  left:calc(50% + var(--d) * 0.74);
+  top:calc(var(--h) * 1.65);
+}
+
+
+
+/* 
+style 
+*/
+
+ul {
+  filter:drop-shadow(0 0 10px hsla(0,0%,0%,0.3));
+}
+img {
+    background-color: aquamarine;
+    transition: .4s;
+}
+img:hover {
+    background-color: blueviolet;
+}
+li:hover {
+  filter:drop-shadow(0 0 10px powderblue);
+  z-index:10;
+}
+
+/*
+anim
+*/
+
+    .container {
+        height: 720px;
+        padding: 0;
+        margin: 0;
+        background: url('bg.png') no-repeat right;
+
+    }
+    .description {
+        left: 0;
+
+        font-size: 50px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+ul {
+    
+    margin: 70px;
+  animation:r 4s forwards;
+} @keyframes r {
+  from {transform:rotate(180deg)}
+  to {transform:rotate(0)}
+}
+
+li {
+  animation:ir 4s forwards;
+} @keyframes ir {
+  from {transform:rotate(-360deg)}
+  to {transform:rotate(0)}
+}
+.blue {
+    color: blue;
+    transition: 0.4s;
+}
+.yellow {
+    color: yellow;
+    transition: 0.4s;
+}
+</style>
+<body>
+
+    <div class="container">
+        <ul>
+            <li><a href="#"><img class="first" src="web-01.svg"/></a></li>
+            <li><a href="#"><img class="second" src="web-development.svg"/></a></li>
+            <li><a href="#"><img class="third" src="search-dollar-solid.svg"/></a></li>
+            <li><a href="#"><img class="fourth" src="photo-01.svg"/></a></li>
+            <li><a href="#"><img class="fifth" src="video-01.svg"/></a></li>
+            <li><a href="#"><img class="sixth" src="graphic-01.svg"/></a></li>
+          </ul>
+                <i src='web-development.svg'></i>
+    </div>
+    <div class="description">
+
+        <h3 hidden><span class="ser">WEBSITE DESIGN</span><br><br><em>
+            We always aim for beautiful & unique websites that speak clearly to your audience.</em></h3>
+        
+        <h3 hidden><span class="ser">WEB DEVELOPMENT</span><br><br>
+            <em>We Develop and optimize beautifulsigns with a long lasting finish to enhance your business & branding visuals feautures.</em></h3>
+
+        <h3><span class="ser">SEO OPTIMIZATION</span><br><br><em>
+            Find out where your business stands in your market  and carve out a strong position at the forefront of your industry witha bespoke strategy.</em></h3>
+        <h3 hidden><span class="ser">PHOTOGRAPHY<br><br>
+            </span><em>We capture amazing images to replicate your business to its full potential.</em></h3>
+
+        <h3 hidden><span class="ser">VIDEO ANIMATIONS</span><br><br><em>
+            Having online videos, engages your visitors, enhances search engine optimization.</em></h3>
+        
+        <h3 hidden><span class="ser">GRAPHIC DESIGN</span><br><br><em>We combine fresh & creative approach to brand design helping our
+             clients reap the rewards.</em></h3>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(".first").hover(function(){
+                $('h3').hide();
+                $("h3:nth-child(1)").fadeIn(300);
+            });
+            
+            $(".second").hover(function(){
+                $('h3').hide();
+                $("h3:nth-child(2)").fadeIn(300);
+            });
+             $(".third").hover(function(){
+                $('h3').hide();
+                $("h3:nth-child(3)").fadeIn(300);
+            });
+            $(".fourth").hover(function(){
+                $('h3').hide();
+                $("h3:nth-child(4)").fadeIn(300);
+            });
+            
+            $(".fifth").hover(function(){
+                $('h3').hide();
+                $("h3:nth-child(5)").fadeIn(300);
+            });
+             $(".sixth").hover(function(){
+                $('h3').hide();
+                $("h3:nth-child(6)").fadeIn(300);
+            });
+        });
+    </script>
+</body>
+</html>
